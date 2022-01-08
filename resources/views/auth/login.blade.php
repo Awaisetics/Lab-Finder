@@ -118,7 +118,7 @@
                                             </form>
                                             <hr>
                                             <div class="text-center"><small class="mr-25">Don't have an
-                                                    account?</small><a href="auth-register.html"><small>Sign
+                                                    account?</small><a href="/register"><small>Sign
                                                         up</small></a></div>
                                         </div>
                                     </div>
