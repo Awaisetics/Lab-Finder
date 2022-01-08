@@ -38,6 +38,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         //Validate Inputs
+        // int n = 0;
         $request->validate([
             'email'=>'required|email|exists:users,email',
             'password'=>'required|min:5|max:30'
