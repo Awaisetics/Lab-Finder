@@ -16,14 +16,16 @@ class AuthController extends Controller
              'name'=>'required',
              'email'=>'required|email|unique:users,email',
              'role'=>'required',
+             'status'=>'required',
              'location'=>'required',
-             'password'=>'required|min:5|max:30',
-             'cpassword'=>'required|min:5|max:30|same:password'
+             'password'=>'required|min:3|max:30',
+             'cpassword'=>'required|min:3|max:30|same:password'
             ]);
           $user = new User();
           $user->name = $request->name;
           $user->email = $request->email;
           $user->role = $request->role;
+          $user->status = $request->status;
           $user->location = $request->location;
           $user->password = \Hash::make($request->password);
           $save = $user->save();
@@ -49,21 +51,29 @@ class AuthController extends Controller
                 
             if( Auth::guard('web')->user()->role =='laboratory' )
             {
-            return redirect('/lab/home');
+                if(Auth::guard('web')->user()->status =='1')
+                {
+                    return redirect('/lab/home');
+                }
+                else
+                {
+                    return redirect()->back()->with('fail', 'Your Request Yet to be Approved');
+                }
             }
             if( Auth::guard('web')->user()->role =='patient' )
             {
-            return redirect('/patient/home');
+                return redirect('/patient/home');
             }
             if( Auth::guard('web')->user()->role =='employee' )
             {
-            return redirect('/employee/home');
+                return redirect('/employee/home');
             }
             if( Auth::guard('web')->user()->role =='admin' )
             {
-            return redirect('/admin/home');
+                return redirect('/admin/home');
             }
-        }else{
+        }
+        else{
             return redirect('/login')->with('fail','Incorrect Credentials');
         }
     }

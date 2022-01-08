@@ -107,6 +107,7 @@
                                                         id="exampleInputPassword1" placeholder="Confirm Password">
                                                 </div>
                                                 <input type="text" name="role" value="laboratory" hidden>
+                                                <input type="text" name="status" value="0" hidden>
                                                 <button type="submit"
                                                     class="btn btn-primary glow position-relative w-100">SIGN UP<i
                                                         id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>

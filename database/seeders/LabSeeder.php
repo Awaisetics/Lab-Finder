@@ -20,6 +20,7 @@ class LabSeeder extends Seeder
             'name' => 'Laboratory',
             'email' => 'laboratory@gmail.com',
             'role' => 'laboratory',
+            'status' => '1',
             'password' => Hash::make('lab'),
             'remember_token' => Str::random(10),
         ]);
