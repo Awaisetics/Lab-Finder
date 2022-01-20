@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\email;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -83,6 +86,34 @@ class AuthController extends Controller
     {
         Auth::guard('web')->logout();
         return redirect('/login');
+    }
+
+    public function labRequests()
+    {
+        $user = DB::table('users')->where('status', 0)->get();
+        return view('admin.requests', [ 'users' => $user]);
+    }
+
+    public function approveRequests(Request $request, $user_id)
+    {
+        $id = User::find($user_id);
+        $details = [
+            'title' => 'Demo Class Request',
+            'body' => 'Your request for demo class has been Approved',
+            // 'Course-Name' => $course_name,
+            // 'Course-schedule' => $course_schedule,
+            // 'Course-howToConduct' => $course_howToConduct,
+        ];
+        Mail::to('uxama.ali420@gmail.com')->send(new email($details));
+        if (Mail::failures()) {
+            return response()->Fail('Sorry! Please try again latter');
+       }else{
+        return redirect('/admin/home');
+            // return response()->success('Great! Successfully send in your mail');
+          }
+        // return redirect('/admin/home');
+
+        // return redirect()->back()->with('success' , 'Request Approved');
     }
 
 }

@@ -19,7 +19,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->group(function () 
 {
     Route::view('/home', 'admin.home');
+    Route::get('/requests', [AuthController::class, 'labRequests']);
+Route::get('/lab/approve/{id}', [AuthController::class, 'approveRequests']);
+
 });
+
+
 
 // Laboratory Routes
 Route::prefix('lab')->group(function () 
