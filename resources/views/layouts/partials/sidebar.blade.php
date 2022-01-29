@@ -44,6 +44,7 @@
                 </li>
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
                 <li class=" nav-item"><a href="/admin/requests"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Requests</span></a>
+                <li class=" nav-item"><a href="/admin/labs"><i class="bx bx-handicap" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Laborateries</span></a>
                 </li>
                 @endif
                 @if(Auth::user()->role == 'laboratory')
