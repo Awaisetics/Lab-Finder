@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -40,19 +42,16 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        //Validate Inputs
-        // int n = 0;
         $request->validate([
             'email'=>'required|email|exists:users,email',
             'password'=>'required|min:5|max:30'
         ],[
-            'email.exists'=>'This email is not exists in users table'
+            'email.exists'=>'This email does not exist in users table'
         ]);
 
         $creds = $request->only('email','password');
 
-        if( Auth::guard('web')->attempt($creds) ){
-                
+        if( Auth::guard('web')->attempt($creds) ){               
             if( Auth::guard('web')->user()->role =='laboratory' )
             {
                 if(Auth::guard('web')->user()->status =='1')
@@ -94,26 +93,64 @@ class AuthController extends Controller
         return view('admin.requests', [ 'users' => $user]);
     }
 
-    public function approveRequests(Request $request, $user_id)
+    public function approveOrRejectRequest(Request $request, $user_id)
     {
-        $id = User::find($user_id);
-        $details = [
-            'title' => 'Demo Class Request',
-            'body' => 'Your request for demo class has been Approved',
-            // 'Course-Name' => $course_name,
-            // 'Course-schedule' => $course_schedule,
-            // 'Course-howToConduct' => $course_howToConduct,
-        ];
-        Mail::to('uxama.ali420@gmail.com')->send(new email($details));
-        if (Mail::failures()) {
-            return response()->Fail('Sorry! Please try again latter');
-       }else{
-        return redirect('/admin/home');
-            // return response()->success('Great! Successfully send in your mail');
-          }
-        // return redirect('/admin/home');
+        $url = URL::current();
+        if(Str::contains($url, 'delete'))
+        {
+            $id = User::find($user_id);
+            $id->delete();
+            return redirect('/admin/home')->with('success', 'Lab deleted Successfully');
+        }
+        if(Str::contains($url, 'approve'))
+        {
+            $id = User::find($user_id);
+            $id->status = 1;
+            $id->save();
+            $details = [
+                'title' => 'Lab approval or rejection request',
+                'body' => 'Your request for signup has been Approved'
+            ];
+            Mail::to($id->email)->send(new email($details));
+            if (Mail::failures())
+            {
+                return response()->Fail('Sorry! Please try again latter');
+            }
+            else
+            {
+                return redirect('/admin/labs')->with('success', 'Lab SignUp Request Has Been Accepted');
+            }
+        }
+        else
+        {
+            $id = User::find($user_id);
+            $details = [
+                'title' => 'Lab approval or rejection request',
+                'body' => 'Your request for signup has been rejected'
+            ];
+            Mail::to($id->email)->send(new email($details));
+            $id->delete();
+            if (Mail::failures())
+            {
+                return response()->Fail('Sorry! Please try again latter');
+            }
+            else
+            {
+                return redirect('/admin/home')->with('success', 'Lab SignUp Request Has Been Rejected');
+            }
+        }
+    }
 
-        // return redirect()->back()->with('success' , 'Request Approved');
+    public function LabList()
+    {
+        $user = DB::table('users')->where('status', 1)->get();
+        return view('admin.labs', [ 'users' => $user]);
+    }
+
+    public function getLab($id)
+    {
+        $user = User::find($id);
+        return response()->json(['user'=>$user]);
     }
 
 }
