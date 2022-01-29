@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\email;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -37,18 +42,16 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        //Validate Inputs
         $request->validate([
             'email'=>'required|email|exists:users,email',
             'password'=>'required|min:5|max:30'
         ],[
-            'email.exists'=>'This email is not exists in users table'
+            'email.exists'=>'This email does not exist in users table'
         ]);
 
         $creds = $request->only('email','password');
 
-        if( Auth::guard('web')->attempt($creds) ){
-                
+        if( Auth::guard('web')->attempt($creds) ){               
             if( Auth::guard('web')->user()->role =='laboratory' )
             {
                 if(Auth::guard('web')->user()->status =='1')
@@ -82,6 +85,72 @@ class AuthController extends Controller
     {
         Auth::guard('web')->logout();
         return redirect('/login');
+    }
+
+    public function labRequests()
+    {
+        $user = DB::table('users')->where('status', 0)->get();
+        return view('admin.requests', [ 'users' => $user]);
+    }
+
+    public function approveOrRejectRequest(Request $request, $user_id)
+    {
+        $url = URL::current();
+        if(Str::contains($url, 'delete'))
+        {
+            $id = User::find($user_id);
+            $id->delete();
+            return redirect('/admin/home')->with('success', 'Lab deleted Successfully');
+        }
+        if(Str::contains($url, 'approve'))
+        {
+            $id = User::find($user_id);
+            $id->status = 1;
+            $id->save();
+            $details = [
+                'title' => 'Lab approval or rejection request',
+                'body' => 'Your request for signup has been Approved'
+            ];
+            Mail::to($id->email)->send(new email($details));
+            if (Mail::failures())
+            {
+                return response()->Fail('Sorry! Please try again latter');
+            }
+            else
+            {
+                return redirect('/admin/labs')->with('success', 'Lab SignUp Request Has Been Accepted');
+            }
+        }
+        else
+        {
+            $id = User::find($user_id);
+            $details = [
+                'title' => 'Lab approval or rejection request',
+                'body' => 'Your request for signup has been rejected'
+            ];
+            Mail::to($id->email)->send(new email($details));
+            $id->delete();
+            if (Mail::failures())
+            {
+                return response()->Fail('Sorry! Please try again latter');
+            }
+            else
+            {
+                return redirect('/admin/home')->with('success', 'Lab SignUp Request Has Been Rejected');
+            }
+        }
+    }
+
+    public function LabList()
+    {
+        $user = DB::table('users')->where('status', 1)->get();
+        return view('admin.labs', [ 'users' => $user]);
+    }
+
+    public function getLab($id)
+    {
+        $user = User::find($id);
+        return response()->json(['user'=>$user]);
     }
 
 }

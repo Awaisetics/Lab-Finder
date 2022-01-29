@@ -23,8 +23,8 @@
     <!-- END: Header-->
 
 
-    <!-- BEGIN: Main Menu-->
-    @include('layouts.partials.main-menu')
+    <!-- BEGIN: Side Bar-->
+    @include('layouts.partials.sidebar')
     <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->

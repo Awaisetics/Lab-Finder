@@ -39,8 +39,7 @@
                                     <td>
                                         <div class="row">
                                             <span id="btn" value="{{$user->id}}"><i class="badge-circle badge-circle-light-secondary bx bx-show font-medium-1"></i></span>
-                                            <a style="margin: 7px 0 0 7px; float:right" href="/admin/lab/approve/{{$user->id}}"><i class="badge-circle badge-circle-light-secondary bx bx-check font-medium-1"></i></a>
-                                            <a style="margin: 7px 0 0 7px; float:right" href="/admin/lab/reject/{{$user->id}}"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle font-medium-1"></i></a>
+                                            <a style="float: right; margin: 7px 0 0 7px;" href="/admin/lab/delete/{{$user->id}}"><i class="badge-circle badge-circle-light-secondary bx bx-trash font-medium-1"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -110,43 +109,31 @@
             $(document).on('click', '#btn', function() {
                 let id = $(this).attr('value');
                 $.ajax({
-                    type: 'GET',
+                    type: 'get',
                     url: "/admin/getUser/" + id,
                     data: {
                         _token: "{{  csrf_token() }}"
                     },
                     success: function(data) {
                         $('#exampleModal').modal('show');
-                        if(data.user.name == "" || data.user.name == null)
-                        {
+                        if (data.user.name == "" || data.user.name == null) {
                             $('.name').text("Name Not Found");
-                        }
-                        else
-                        {
+                        } else {
                             $('.name').text(data.user.name);
                         }
-                        if(data.user.location == "" || data.user.location == null)
-                        {
+                        if (data.user.location == "" || data.user.location == null) {
                             $('#location').text("Location Not Found");
-                        }
-                        else
-                        {
+                        } else {
                             $('#location').text(data.user.location);
                         }
-                        if(data.user.created_at == "" || data.user.created_at == null)
-                        {
+                        if (data.user.created_at == "" || data.user.created_at == null) {
                             $('#created_at').text("Date Not Found");
-                        }
-                        else
-                        {
+                        } else {
                             $('#created_at').text(data.user.created_at);
                         }
-                        if(data.user.role == "" || data.user.role == null)
-                        {
+                        if (data.user.role == "" || data.user.role == null) {
                             $('#role').text("Role Not Found");
-                        }
-                        else
-                        {
+                        } else {
                             $('#role').text(data.user.role);
                         }
                     }

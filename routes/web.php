@@ -19,7 +19,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->group(function () 
 {
     Route::view('/home', 'admin.home');
+    Route::get('/requests', [AuthController::class, 'labRequests']);
+    Route::get('/getUser/{id}', [AuthController::class, 'getLab']);
+    // Route::get('/getApprovedUser/{id}', [AuthController::class, 'getApprovedUser']);
+    Route::get('/lab/approve/{id}', [AuthController::class, 'approveOrRejectRequest']);
+    Route::get('/lab/reject/{id}', [AuthController::class, 'approveOrRejectRequest']);
+    Route::get('/lab/delete/{id}', [AuthController::class, 'approveOrRejectRequest']);
+    Route::get('/labs', [AuthController::class, 'LabList']);
 });
+
+
 
 // Laboratory Routes
 Route::prefix('lab')->group(function () 

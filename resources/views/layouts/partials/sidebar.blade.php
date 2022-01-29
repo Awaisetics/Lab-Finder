@@ -39,14 +39,18 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-                <li class=" nav-item"><a href="/html/ltr/vertical-menu-template/index.html"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
+                @if(Auth::user()->role == 'admin')
+                <li class=" nav-item"><a href="/admin/home"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
                 </li>
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
-                @if(Auth::user()->role == 'admin')
                 <li class=" nav-item"><a href="/admin/requests"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Requests</span></a>
+                <li class=" nav-item"><a href="/admin/labs"><i class="bx bx-handicap" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Laborateries</span></a>
                 </li>
                 @endif
                 @if(Auth::user()->role == 'laboratory')
+                <li class=" nav-item"><a href="/lab/home"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
+                </li>
+                <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
                 <li class=" nav-item"><a href="app-email.html"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Patient</span></a>
                 </li>
                 <li class=" nav-item"><a href="app-email.html"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Employee</span></a>

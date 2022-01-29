@@ -6,16 +6,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description"
-        content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="Frest admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Frest admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>Register</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
@@ -44,9 +41,7 @@
 
 <!-- BEGIN: Body-->
 
-<body
-    class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static bg-full-screen-image  blank-page"
-    data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static bg-full-screen-image  blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -61,9 +56,13 @@
                             <div class="row m-0">
                                 <!-- register section left -->
                                 <div class="col-md-6 col-12 px-0">
-                                    <div
-                                        class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
+                                    <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
                                         <div class="card-header pb-1">
+                                            @if (Session::get('fail'))
+                                            <div class="alert alert-danger">
+                                                {{ Session::get('fail') }}
+                                            </div>
+                                            @endif
                                             <div class="card-title">
                                                 <h4 class="text-center mb-2">Sign Up</h4>
                                             </div>
@@ -80,49 +79,44 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6 mb-50">
                                                         <label for="inputfirstname4">Name</label>
-                                                        <input type="text" class="form-control" name="name"
-                                                            id="inputfirstname4" placeholder="Name">
+                                                        <input type="text" class="form-control" name="name" id="inputfirstname4" placeholder="Name">
+                                                        <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                                                     </div>
                                                     <div class="form-group col-md-6 mb-50">
                                                         <label for="exampleInputUsername1">Email</label>
-                                                        <input type="email" class="form-control" name="email"
-                                                            id="exampleInputUsername1" placeholder="Email">
+                                                        <input type="email" class="form-control" name="email" id="exampleInputUsername1" placeholder="Email">
+                                                        <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-50">
                                                     <label class="text-bold-600" for="">Location</label>
-                                                    <input type="text" class="form-control" name="location" id=""
-                                                        placeholder="Location">
+                                                    <input type="text" class="form-control" name="location" id="" placeholder="Location">
+                                                    <span class="text-danger">@error('location'){{ $message }}@enderror</span>
                                                 </div>
                                                 <div class="form-group mb-2">
-                                                    <label class="text-bold-600"
-                                                        for="exampleInputPassword1">Password</label>
-                                                    <input type="password" class="form-control" name="password"
-                                                        id="exampleInputPassword1" placeholder="Password">
+                                                    <label class="text-bold-600" for="exampleInputPassword1">Password</label>
+                                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+                                                    <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                                                 </div>
                                                 <div class="form-group mb-2">
-                                                    <label class="text-bold-600" for="exampleInputPassword1">Confirm
-                                                        Password</label>
-                                                    <input type="password" class="form-control" name="cpassword"
-                                                        id="exampleInputPassword1" placeholder="Confirm Password">
+                                                    <label class="text-bold-600" for="exampleInputPassword1">Confirm Password</label>
+                                                    <input type="password" class="form-control" name="cpassword" id="exampleInputPassword1" placeholder="Confirm Password">
+                                                    <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                                                 </div>
                                                 <input type="text" name="role" value="laboratory" hidden>
                                                 <input type="text" name="status" value="0" hidden>
-                                                <button type="submit"
-                                                    class="btn btn-primary glow position-relative w-100">SIGN UP<i
-                                                        id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                                <button type="submit" class="btn btn-primary glow position-relative w-100">SIGN UP<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                             </form>
                                             <hr>
                                             <div class="text-center"><small class="mr-25">Already have an
-                                                    account?</small><a href="auth-login.html"><small>Sign in</small>
+                                                    account?</small><a href="/login"><small>Sign in</small>
                                                 </a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- image section right -->
                                 <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
-                                    <img class="img-fluid" src="/app-assets/images/pages/register.png"
-                                        alt="branding logo">
+                                    <img class="img-fluid" src="/app-assets/images/pages/register.png" alt="branding logo">
                                 </div>
                             </div>
                         </div>
