@@ -44,7 +44,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'email'=>'required|email|exists:users,email',
-            'password'=>'required|min:5|max:30'
+            'password'=>'required|min:3|max:30'
         ],[
             'email.exists'=>'This email does not exist in users table'
         ]);
@@ -66,6 +66,10 @@ class AuthController extends Controller
             if( Auth::guard('web')->user()->role =='patient' )
             {
                 return redirect('/patient/home');
+            }
+            if( Auth::guard('web')->user()->role =='employee' )
+            {
+                return redirect('/employee/home');
             }
             if( Auth::guard('web')->user()->role =='employee' )
             {
@@ -100,7 +104,7 @@ class AuthController extends Controller
         {
             $id = User::find($user_id);
             $id->delete();
-            return redirect('/admin/home')->with('success', 'Lab deleted Successfully');
+            return redirect()->back()->with('success', 'Lab deleted Successfully');
         }
         if(Str::contains($url, 'approve'))
         {
@@ -108,10 +112,14 @@ class AuthController extends Controller
             $id->status = 1;
             $id->save();
             $details = [
-                'title' => 'Lab approval or rejection request',
+                'title' => 'Lab approval',
                 'body' => 'Your request for signup has been Approved'
             ];
-            Mail::to($id->email)->send(new email($details));
+            Mail::send('admin.acceptMail', ['details' => $details], function ($m) use ($id) {
+                $m->from('info@labfinder.com', 'BusinessPluse');
+                $m->to($id->email, 'admin')->subject('Your Reminder!');
+            });
+
             if (Mail::failures())
             {
                 return response()->Fail('Sorry! Please try again latter');
@@ -125,10 +133,13 @@ class AuthController extends Controller
         {
             $id = User::find($user_id);
             $details = [
-                'title' => 'Lab approval or rejection request',
-                'body' => 'Your request for signup has been rejected'
+                'title' => 'Lab Rejection',
+                'body' => 'Your request for signup has been Rejected'
             ];
-            Mail::to($id->email)->send(new email($details));
+            Mail::send('admin.rejectMail', ['details' => $details], function ($m) use ($id) {
+                $m->from('info@labfinder.com', 'BusinessPluse');
+                $m->to($id->email, 'admin')->subject('Your Reminder!');
+            });
             $id->delete();
             if (Mail::failures())
             {

@@ -15,11 +15,11 @@
 
 <body>
 
-    <div class="bg-primary text-center mb-0">
+    <div class="text-center mb-0" style="background-color: #410c91;">
         <p class="text-white text-lighten-5 py-1">Need A Covid Test ? <button class=" ml-2 btn btn-warning btn-sm">Take It Now</button></p>
     </div>
 
-    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu bg-secondary navbar-dark mt-n1">
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-dark mt-n1" style="background-color: white;">
         <div class="navbar-wrapper">
             <div class="navbar-container content">
                 <div class="navbar-collapse" id="navbar-mobile-3">
@@ -55,40 +55,27 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item d-none d-lg-block ">
-                            <a class="nav-link " href="javascript:void(0);">
-                                <span class="text-info">Menu</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="javascript:void(0);">
-                                <span>Link</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="javascript:void(0);">
-                                <span>Link</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link disabled">
-                                <span> Disabled </span>
-                            </a>
+                        <li class="nav-item d-none d-lg-block" style="color: #410c91;padding-top: 10px;font-size: 15px;">
+                                <span>Get Tested. Live Healthy.</span>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav float-right right-menu align-items-center">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="javascript:void(0);">
                                 <span>Default Color</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link py-0" href="javascript:void(0);">
-                                <div class="btn btn-icon btn-sm btn-primary glow">
-                                    <span class="d-none d-sm-block">Download</span>
-                                    <i class="d-sm-none d-block bx bx-cloud-download"></i>
+                                <div class="btn btn-icon btn-sm">
+                                    <a href="/register">
+                                        <span style="color: #410c91;" class="d-none d-sm-block">Register</span>
+                                    </a>
                                 </div>
-                            </a>
+                                <div class="btn btn-icon btn-sm pr-3">
+                                    <a href="/login">
+                                        <span style="color: #410c91;" class="d-none d-sm-block">Log In</span>
+                                    </a>
+                                </div>
                         </li>
                     </ul>
                 </div>
@@ -156,7 +143,7 @@
                 a noncancerous condition such as prostatitis, or an enlarged prostate.</p>
         </div>
         <div class="col-md-5">
-            <img class="pl-5" src="/assets/images/doctor.png" height="300px" width="auto" alt="Doctor Sticker">
+            <img style="padding-bottom: 47px;" class="pl-5" src="/assets/images/doctor.png" height="300px" width="auto" alt="Doctor Sticker">
         </div>
     </div>
 
@@ -231,14 +218,14 @@
 
                         </div>
                         <div class="carousel-item">
-                            <div class="img-box"><img src="/assets/images/arab.png" alt=""></div>
+                            <div class="img-box"><img src="/assets/images/face.png" alt=""></div>
                             <p class="testimonial" style="font-size: 20px;">
                                 I was easily able to find a location for COVID testing for myself and my two kids.
                             </p>
 
                         </div>
                         <div class="carousel-item">
-                            <div class="img-box"><img src="/assets/images/doctor.png" alt=""></div>
+                            <div class="img-box"><img src="/assets/images/muslim.png" alt=""></div>
                             <p class="testimonial" style="font-size: 20px;">
                              I just really appreciate you all for making such a stressful situation easier for us.
                             </p>
@@ -257,35 +244,18 @@
     </div>
 
     <!-- Footer -->
-    <footer class="home_footer" > <br> <br>
-      <div class="container-fluid pt-4" style="background-color: #532b9f ;">
-        <div class="row text-center text-light">
-          <div class="col-md-3">
-            <h3 class="font-w8 text-light">Lab Finder</h3>
-            <hr class="dropdown-divider"> <br>
-            <p class="font-w8">Managing your staff is a one click away, just signup and enjoy</p> <br> <br>
-          </div>
-          <div class="col-md-3">
-            <h3 class="font-w8">Quick Links</h3>
-            <hr class="dropdown-divider"> <br>
-            <p class="font-weight-bold"><i class="pr-3 text-light fs-4 fas fa-user-plus "></i><a href="/manager">SignUp</a></p>
-            <p class="font-weight-bold"><i class="pr-3 text-light fs-4 fas fa-sign-in-alt "></i><a href="/manager">Login</a></p> <br> <br>
-          </div>
-          <div class="col-md-3">
-            <h3 class="font-w8">Follow Up</h3>
-            <hr class="dropdown-divider"> <br>
-            <i class="fs-3 fab fa-instagram"></i>
-            <i class="pl-4 fs-3 fab fa-facebook-f"></i>
-            <i class="pl-4 fs-3 fab fa-youtube"></i> <br><br> <br>
-          </div>
-          <div class="col-md-3">
-            <h3 class="font-w8">Contact Us</h3>
-            <hr class="dropdown-divider"> <br>
-            <h5 class="font-w8">+012-345-111</h5>
-            <h5 class="font-w8">mr@gmail.com</h5>
-          </div>
-        </div> <br><br><br>
-      </div>
+
+    <footer style="margin-top: 50px; background-color:#410c91; height:80px">
+    <div class="row" style="color: white;">
+        <div class="col-md-1 pt-2" style="text-align: right;">
+            <i class="fa fa-wheelchair fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-5" style="    padding-top: 29px; padding-left: 21px;">
+            <p>© 2021 LabFinder, LLC. All Rights Reserved.</p>
+        </div>
+        <div class="col-md-2 pl-0"></div>
+        <div class="col-md-4"></div>
+    </div>
     </footer>
     @include('layouts.partials.scripts')
 

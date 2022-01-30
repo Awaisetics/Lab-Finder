@@ -51,9 +51,16 @@
                 <li class=" nav-item"><a href="/lab/home"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
                 </li>
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
-                <li class=" nav-item"><a href="app-email.html"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Patient</span></a>
+                <li class=" nav-item"><a href="javascript:void(0)"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Patient</span></a>
                 </li>
-                <li class=" nav-item"><a href="app-email.html"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Employee</span></a>
+                <li class=" nav-item"><a href="/lab/addEmploye"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Employee</span></a>
+                </li>
+                @endif
+                @if(Auth::user()->role == 'employee')
+                <li class=" nav-item"><a href="/employee/home"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
+                </li>
+                <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
+                <li class=" nav-item"><a href="/lab/patients"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Patient</span></a>
                 </li>
                 @endif
                 <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="users"></i><span class="menu-title text-truncate" data-i18n="User">Manage Users</span></a>
