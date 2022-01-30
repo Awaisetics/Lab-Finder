@@ -62,14 +62,6 @@
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">Menu</span>
                 <li class=" nav-item"><a href="/lab/patients"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title text-truncate" data-i18n="Email">Patient</span></a>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="users"></i><span class="menu-title text-truncate" data-i18n="User">Tests</span></a>
-                    <ul class="menu-content">
-                       <li><a class="d-flex align-items-center" href="/lab/tests"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="View">View</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center" href="/lab/test/add"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Edit">Add</span></a>
-                        </li>
-                    </ul>
-                </li>
                 @endif
                 <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="users"></i><span class="menu-title text-truncate" data-i18n="User">Manage Users</span></a>
                     <ul class="menu-content">

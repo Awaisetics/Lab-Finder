@@ -25,7 +25,7 @@ class AuthController extends Controller
              'location'=>'required',
              'password'=>'required|min:3|max:30',
              'cpassword'=>'required|min:3|max:30|same:password'
-            ]);  
+            ]);
           $user = new User();
           $user->name = $request->name;
           $user->email = $request->email;
@@ -41,7 +41,7 @@ class AuthController extends Controller
           }
     }
     public function login(Request $request)
-    {  
+    {
         $request->validate([
             'email'=>'required|email|exists:users,email',
             'password'=>'required|min:3|max:30'
@@ -126,7 +126,7 @@ class AuthController extends Controller
             }
             else
             {
-                return redirect()->back()->with('success', 'Lab Registration Request Has Been Accepted');
+                return redirect('/admin/labs')->with('success', 'Lab SignUp Request Has Been Accepted');
             }
         }
         else
