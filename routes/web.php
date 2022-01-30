@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LabController;
+use App\Http\Controllers\TestController;
 
 Route::view('/', 'index');
 
@@ -29,8 +30,6 @@ Route::prefix('admin')->group(function ()
     Route::get('/labs', [AuthController::class, 'LabList']);
 });
 
-
-
 // Laboratory Routes
 Route::prefix('lab')->group(function () 
 {
@@ -42,6 +41,11 @@ Route::prefix('lab')->group(function ()
     Route::get('/addEmploye', function(){
         return view('lab.AddEmployee');
     });
+
+    Route::get('/tests',  [TestController::class, 'index']);
+    Route::view('/test/add', 'lab.addTest');
+    Route::post('/test/store', [TestController::class, 'store']);
+
 });
 
 // Patient Routes
